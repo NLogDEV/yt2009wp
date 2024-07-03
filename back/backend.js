@@ -187,6 +187,13 @@ if(!config.disableWs) {
     }
 }
 
+const logURLs = (req, res, next) => {
+    console.log(`URL: ${req.url}`);
+    next();
+};
+
+app.get('*', logURLs);
+
 app.get('/back/*', (req,res) => {
     res.redirect("https://github.com/ftde0/yt2009")
 })
