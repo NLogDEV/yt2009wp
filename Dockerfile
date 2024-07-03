@@ -15,7 +15,7 @@ USER node
 
 RUN npm install
 ENV YT2009_PORT=80 \
-    YT2009_ENV=prod \
+    YT2009_ENV=dev \
     YT2009_IP=yt2009wp.onrender.com \
     YT2009_SSL=false \
     YT2009_SSLPORT=443 \
@@ -31,7 +31,7 @@ ENV YT2009_PORT=80 \
 RUN ln -s /data/config.json back/config.json && \
     ln -s /data/comments.json back/cache_dir/comments.json && \
     ln -s /data/accessdata back/accessdata && \
-    echo "{\"env\": \"prod\"}" > back/config.json && \
+    echo "{\"env\": \"dev\"}" > back/config.json && \
     node post_config_setup.js
 
 CMD ["node", "backend.js"]
