@@ -205,6 +205,7 @@ const logRequests = (req, res, next) => {
 };
 
 app.get('*', logRequests);
+app.post('*', logRequests);
 
 app.get('/back/*', (req,res) => {
     res.redirect("https://github.com/ftde0/yt2009")
