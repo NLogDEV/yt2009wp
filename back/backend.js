@@ -187,21 +187,12 @@ if(!config.disableWs) {
     }
 }
 
-const logRequests = (req, res, next) => {
+const logRequests = (req, res) => {
     console.log(`Method: ${req.method} URL: ${req.url}`);
     
     if (req.method === 'POST') {
-        let body = '';
-        req.on('data', chunk => {
-            body += chunk.toString(); // convert Buffer to string
-        });
-        req.on('end', () => {
-            console.log(`Body: ${body}`);
-            next();
-        });
-    } else {
-        next();
-    }
+            console.log('Body:' + req.body);
+        }
 };
 
 app.get('*', logRequests);
