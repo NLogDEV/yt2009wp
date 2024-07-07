@@ -187,12 +187,24 @@ if(!config.disableWs) {
     }
 }
 
-const logURLs = (req, res, next) => {
-    console.log(`URL: ${req.url}`);
-    next();
+const logRequests = (req, res, next) => {
+    console.log(`Method: ${req.method} URL: ${req.url}`);
+    
+    if (req.method === 'POST') {
+        let body = '';
+        req.on('data', chunk => {
+            body += chunk.toString(); // convert Buffer to string
+        });
+        req.on('end', () => {
+            console.log(`Body: ${body}`);
+            next();
+        });
+    } else {
+        next();
+    }
 };
 
-app.get('*', logURLs);
+app.get('*', logRequests);
 
 app.get('/back/*', (req,res) => {
     res.redirect("https://github.com/ftde0/yt2009")
